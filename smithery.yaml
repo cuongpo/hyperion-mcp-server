@@ -1,0 +1,168 @@
+name: hyperion-mcp
+displayName: Hyperion Blockchain MCP Server
+description: Model Context Protocol server for Hyperion blockchain (testnet) interactions - wallet management, tMETIS transactions, and smart contract interactions on Chain ID 133717
+version: 1.0.0
+author: Hyperion MCP Team
+license: MIT
+homepage: https://github.com/your-org/hyperion-mcp-server
+repository: https://github.com/your-org/hyperion-mcp-server
+
+categories:
+  - blockchain
+  - cryptocurrency
+  - wallet
+  - defi
+
+keywords:
+  - hyperion
+  - hyperion-testnet
+  - blockchain
+  - cryptocurrency
+  - wallet
+  - tmetis
+  - smart-contracts
+  - defi
+  - mcp
+  - model-context-protocol
+  - chain-133717
+
+runtime:
+  node: ">=18.0.0"
+
+build:
+  command: npm run build
+  outputDir: build
+
+install:
+  command: npm install
+
+start:
+  command: node build/index.js
+
+environment:
+  required:
+    - HYPERION_RPC_URL
+  optional:
+    - HYPERION_CHAIN_ID
+    - HYPERION_NETWORK_NAME
+    - HYPERION_CURRENCY_SYMBOL
+    - HYPERION_EXPLORER_URL
+    - HYPERION_PRIVATE_KEYS
+    - HYPERION_ADDRESSES
+    - HYPERION_CURRENT_ADDRESS
+
+tools:
+  - name: create_wallet
+    description: Create a new Hyperion wallet with generated mnemonic
+    category: wallet
+  
+  - name: import_wallet
+    description: Import existing wallet using private key or mnemonic
+    category: wallet
+  
+  - name: list_wallets
+    description: List all available wallets
+    category: wallet
+  
+  - name: get_balance
+    description: Get wallet balance (native or ERC20 tokens)
+    category: query
+  
+  - name: send_transaction
+    description: Send native tokens or ERC20 tokens
+    category: transaction
+  
+  - name: get_transaction
+    description: Get transaction details by hash
+    category: query
+  
+  - name: get_block
+    description: Get block information
+    category: query
+  
+  - name: get_network_info
+    description: Get network status and information
+    category: query
+  
+  - name: estimate_gas
+    description: Estimate transaction gas costs
+    category: utility
+  
+  - name: call_contract
+    description: Call smart contract methods (read-only)
+    category: contract
+  
+  - name: send_contract_transaction
+    description: Send transactions to smart contracts
+    category: contract
+  
+  - name: set_current_wallet
+    description: Set active wallet for transactions
+    category: wallet
+  
+  - name: get_current_wallet
+    description: Get current active wallet info
+    category: wallet
+
+examples:
+  - name: Basic Wallet Operations
+    description: Create wallet, check balance, send transaction
+    code: |
+      // Create a new wallet
+      await mcp.callTool('create_wallet', { name: 'MyWallet' });
+      
+      // Check balance
+      await mcp.callTool('get_balance', { 
+        address: '0x742d35Cc6634C0532925a3b8D4C9db96590c6C87' 
+      });
+      
+      // Send transaction
+      await mcp.callTool('send_transaction', {
+        to: '0x1234567890123456789012345678901234567890',
+        amount: '0.1'
+      });
+
+  - name: Smart Contract Interaction
+    description: Call and transact with smart contracts
+    code: |
+      // Call contract method (read-only)
+      await mcp.callTool('call_contract', {
+        contractAddress: '0xA0b86a33E6441e8e4E2f4c6c8C6c8C6c8C6c8C6c',
+        methodName: 'balanceOf',
+        parameters: ['0x742d35Cc6634C0532925a3b8D4C9db96590c6C87']
+      });
+      
+      // Send contract transaction
+      await mcp.callTool('send_contract_transaction', {
+        contractAddress: '0xA0b86a33E6441e8e4E2f4c6c8C6c8C6c8C6c8C6c',
+        methodName: 'transfer',
+        parameters: ['0x1234567890123456789012345678901234567890', '1000000000000000000']
+      });
+
+documentation:
+  setup: |
+    1. Install Node.js 18 or higher
+    2. Clone the repository
+    3. Run `npm install`
+    4. Copy `.env.example` to `.env` and configure
+    5. Run `npm run build`
+    6. Start with `npm start`
+  
+  configuration: |
+    Configure environment variables in `.env`:
+    - HYPERION_RPC_URL: Blockchain RPC endpoint
+    - HYPERION_PRIVATE_KEYS: Comma-separated private keys
+    - HYPERION_CURRENT_ADDRESS: Default wallet address
+  
+  usage: |
+    The server provides tools for:
+    - Wallet management (create, import, list)
+    - Balance queries (native and ERC20 tokens)
+    - Transaction operations (send, query)
+    - Blockchain queries (blocks, network info)
+    - Smart contract interactions (call, transact)
+
+support:
+  documentation: https://github.com/your-org/hyperion-mcp-server/blob/main/README.md
+  issues: https://github.com/your-org/hyperion-mcp-server/issues
+  discussions: https://github.com/your-org/hyperion-mcp-server/discussions
