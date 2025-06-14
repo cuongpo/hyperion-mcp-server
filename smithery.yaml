@@ -26,18 +26,7 @@ keywords:
   - model-context-protocol
   - chain-133717
 
-runtime:
-  node: ">=18.0.0"
-
-build:
-  command: npm run build
-  outputDir: build
-
-install:
-  command: npm install
-
-start:
-  command: node build/smithery-server.js
+runtime: "typescript"
 
 environment:
   required:

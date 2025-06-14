@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Model Context Protocol server for Hyperion blockchain interactions",
   "main": "build/index.js",
+  "module": "./src/smithery-server.ts",
   "type": "module",
   "scripts": {
     "build": "tsc",
