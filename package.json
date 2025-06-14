@@ -6,8 +6,11 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
+    "build:smithery": "tsc && cp smithery-config.yaml build/",
     "dev": "tsx src/index.ts",
+    "dev:smithery": "npx @smithery/cli dev src/smithery-server.ts",
     "start": "node build/index.js",
+    "start:smithery": "node build/smithery-server.js",
     "test": "jest",
     "lint": "eslint src/**/*.ts",
     "format": "prettier --write src/**/*.ts"
