@@ -82,24 +82,28 @@ test_build() {
 # Function to test server startup
 test_server() {
     print_status "Testing server startup..."
-    
+
     # Set test environment
     export HYPERION_RPC_URL="https://hyperion-testnet.metisdevops.link"
     export HYPERION_CHAIN_ID="133717"
     export HYPERION_NETWORK_NAME="Hyperion Testnet"
     export HYPERION_CURRENCY_SYMBOL="tMETIS"
-    
-    # Test server can start (timeout after 5 seconds)
-    timeout 5s node build/index.js > /dev/null 2>&1 || true
-    
-    if [ $? -eq 124 ]; then
-        print_success "Server starts successfully (timed out as expected)"
-        return 0
-    elif [ $? -eq 0 ]; then
-        print_success "Server completed successfully"
+
+    # Test server can start by checking if it imports without errors
+    if node -e "
+        try {
+            require('./build/index.js');
+            console.log('Server imports successfully');
+            process.exit(0);
+        } catch (error) {
+            console.error('Server import failed:', error.message);
+            process.exit(1);
+        }
+    " > /dev/null 2>&1; then
+        print_success "Server imports and initializes successfully"
         return 0
     else
-        print_error "Server failed to start"
+        print_error "Server failed to import or initialize"
         return 1
     fi
 }
