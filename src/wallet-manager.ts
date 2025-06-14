@@ -43,7 +43,7 @@ export class WalletManager {
   /**
    * Create a new wallet
    */
-  createWallet(name?: string): WalletInfo {
+  createWallet(_name?: string): WalletInfo {
     try {
       // Generate a random mnemonic
       const mnemonic = bip39.generateMnemonic();
@@ -60,7 +60,7 @@ export class WalletManager {
       return {
         address: wallet.address,
         privateKey: wallet.privateKey,
-        mnemonic: mnemonic,
+        mnemonic,
         publicKey: wallet.publicKey,
       };
     } catch (error) {
@@ -71,7 +71,7 @@ export class WalletManager {
   /**
    * Import wallet from private key or mnemonic
    */
-  importWallet(privateKey?: string, mnemonic?: string, name?: string): WalletInfo {
+  importWallet(privateKey?: string, mnemonic?: string, _name?: string): WalletInfo {
     try {
       let wallet: ethers.Wallet | ethers.HDNodeWallet;
 
@@ -97,7 +97,7 @@ export class WalletManager {
       return {
         address: wallet.address,
         privateKey: wallet.privateKey,
-        mnemonic: mnemonic,
+        mnemonic,
         publicKey: 'publicKey' in wallet ? (wallet as any).publicKey : undefined,
       };
     } catch (error) {
@@ -142,7 +142,7 @@ export class WalletManager {
   listWallets(): WalletInfo[] {
     const walletList: WalletInfo[] = [];
     
-    for (const [address, wallet] of this.wallets) {
+    for (const [_address, wallet] of this.wallets) {
       walletList.push({
         address: wallet.address,
         publicKey: 'publicKey' in wallet ? (wallet as any).publicKey : undefined,

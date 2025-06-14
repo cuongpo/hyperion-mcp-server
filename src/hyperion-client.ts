@@ -7,16 +7,12 @@ import axios, { AxiosInstance } from 'axios';
 import { ethers } from 'ethers';
 import {
   HyperionConfig,
-  TransactionRequest,
   TransactionResponse,
   BlockInfo,
   NetworkInfo,
-  ContractCallRequest,
   ContractCallResponse,
-  TokenInfo,
   TokenBalance,
   GasEstimate,
-  TransactionHistory
 } from './types.js';
 
 export class HyperionClient {

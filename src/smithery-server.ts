@@ -6,15 +6,6 @@ import { HyperionClient } from './hyperion-client.js';
 import { WalletManager } from './wallet-manager.js';
 import {
   HyperionConfig,
-  CreateWalletParams,
-  ImportWalletParams,
-  GetBalanceParams,
-  SendTransactionParams,
-  GetTransactionParams,
-  GetBlockParams,
-  CallContractParams,
-  SendContractTransactionParams,
-  EstimateGasParams,
 } from './types.js';
 
 // Load environment variables

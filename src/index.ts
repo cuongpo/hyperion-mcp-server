@@ -23,7 +23,7 @@ import {
   GetBalanceParams,
   SendTransactionParams,
   GetTransactionParams,
-  GetTransactionHistoryParams,
+
   GetBlockParams,
   CallContractParams,
   SendContractTransactionParams,
@@ -42,7 +42,7 @@ class HyperionMCPServer {
     // Initialize configuration
     const config: HyperionConfig = {
       rpcUrl: process.env.HYPERION_RPC_URL || 'https://hyperion-testnet.metisdevops.link',
-      chainId: process.env.HYPERION_CHAIN_ID ? parseInt(process.env.HYPERION_CHAIN_ID) : 133717,
+      chainId: process.env.HYPERION_CHAIN_ID ? parseInt(process.env.HYPERION_CHAIN_ID, 10) : 133717,
       networkName: process.env.HYPERION_NETWORK_NAME || 'Hyperion Testnet',
       explorerUrl: process.env.HYPERION_EXPLORER_URL || 'https://hyperion-testnet-explorer.metisdevops.link',
       currencySymbol: process.env.HYPERION_CURRENCY_SYMBOL || 'tMETIS',
