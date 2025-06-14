@@ -56,6 +56,10 @@ tools:
   - name: get_balance
     description: Get wallet balance (native or ERC20 tokens)
     category: query
+
+  - name: get_native_balance
+    description: Get native tMETIS balance of a wallet address
+    category: query
   
   - name: send_transaction
     description: Send native tokens or ERC20 tokens
@@ -100,9 +104,9 @@ examples:
       // Create a new wallet
       await mcp.callTool('create_wallet', { name: 'MyWallet' });
       
-      // Check balance
-      await mcp.callTool('get_balance', { 
-        address: '0x742d35Cc6634C0532925a3b8D4C9db96590c6C87' 
+      // Check native balance
+      await mcp.callTool('get_native_balance', {
+        address: '0x742d35Cc6634C0532925a3b8D4C9db96590c6C87'
       });
       
       // Send transaction

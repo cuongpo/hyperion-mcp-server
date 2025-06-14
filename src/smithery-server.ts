@@ -191,6 +191,39 @@ export default function createStatelessServer({
     }
   );
 
+  // Get Native Balance Tool (dedicated for tMETIS)
+  server.tool(
+    "get_native_balance",
+    "Get the native tMETIS balance of a wallet address on Hyperion testnet",
+    {
+      address: z.string().describe("Wallet address to check native balance for"),
+    },
+    async ({ address }) => {
+      try {
+        const balance = await hyperionClient.getBalance(address);
+        const networkInfo = await hyperionClient.getNetworkInfo();
+
+        return {
+          content: [
+            {
+              type: "text",
+              text: `Native tMETIS Balance:\n\nAddress: ${address}\nBalance: ${balance} ${hyperionClient.getCurrencySymbol()}\nNetwork: ${networkInfo.networkName} (Chain ID: ${networkInfo.chainId})\nBlock: ${networkInfo.blockNumber}`,
+            },
+          ],
+        };
+      } catch (error) {
+        return {
+          content: [
+            {
+              type: "text",
+              text: `Error getting native balance: ${error instanceof Error ? error.message : String(error)}`,
+            },
+          ],
+        };
+      }
+    }
+  );
+
   // Send Transaction Tool
   server.tool(
     "send_transaction",
