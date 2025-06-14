@@ -1,0 +1,23 @@
+# Simple Dockerfile for quick testing
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy everything (for development/testing)
+COPY . .
+
+# Install dependencies and build
+RUN npm install && npm run build
+
+# Set default environment for Hyperion testnet
+ENV HYPERION_RPC_URL=https://hyperion-testnet.metisdevops.link
+ENV HYPERION_CHAIN_ID=133717
+ENV HYPERION_NETWORK_NAME="Hyperion Testnet"
+ENV HYPERION_CURRENCY_SYMBOL=tMETIS
+
+# Expose port (optional)
+EXPOSE 3000
+
+# Start the application
+CMD ["node", "build/index.js"]

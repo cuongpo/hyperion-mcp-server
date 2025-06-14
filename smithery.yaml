@@ -4,8 +4,8 @@ description: Model Context Protocol server for Hyperion blockchain (testnet) int
 version: 1.0.0
 author: Hyperion MCP Team
 license: MIT
-homepage: https://github.com/your-org/hyperion-mcp-server
-repository: https://github.com/your-org/hyperion-mcp-server
+homepage: https://github.com/cuongpo/hyperion-mcp-server
+repository: https://github.com/cuongpo/hyperion-mcp-server
 
 categories:
   - blockchain
@@ -163,6 +163,6 @@ documentation:
     - Smart contract interactions (call, transact)
 
 support:
-  documentation: https://github.com/your-org/hyperion-mcp-server/blob/main/README.md
-  issues: https://github.com/your-org/hyperion-mcp-server/issues
-  discussions: https://github.com/your-org/hyperion-mcp-server/discussions
+  documentation: https://github.com/cuongpo/hyperion-mcp-server/blob/main/README.md
+  issues: https://github.com/cuongpo/hyperion-mcp-server/issues
+  discussions: https://github.com/cuongpo/hyperion-mcp-server/discussions

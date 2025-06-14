@@ -36,7 +36,7 @@ The Hyperion MCP Server is a developer- and user-oriented backend service that e
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/hyperion-mcp-server.git
+git clone https://github.com/cuongpo/hyperion-mcp-server.git
 cd hyperion-mcp-server
 
 # Install dependencies

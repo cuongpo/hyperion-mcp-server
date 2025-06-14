@@ -4,19 +4,20 @@ FROM node:18-alpine
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies
+# Install system dependencies for building native modules
 RUN apk add --no-cache \
     git \
     python3 \
     make \
-    g++
+    g++ \
+    && rm -rf /var/cache/apk/*
 
-# Copy package files
+# Copy package files first for better caching
 COPY package*.json ./
 COPY tsconfig.json ./
 
-# Install dependencies
-RUN npm ci --only=production
+# Install ALL dependencies first (including dev dependencies for build)
+RUN npm ci
 
 # Copy source code
 COPY src/ ./src/
@@ -24,9 +25,9 @@ COPY src/ ./src/
 # Build the application
 RUN npm run build
 
-# Remove development dependencies and source files
+# Remove development dependencies and source files to reduce image size
 RUN npm prune --production && \
-    rm -rf src/ tsconfig.json
+    rm -rf src/ tsconfig.json node_modules/.cache
 
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs && \
