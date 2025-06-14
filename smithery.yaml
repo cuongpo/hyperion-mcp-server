@@ -37,7 +37,7 @@ install:
   command: npm install
 
 start:
-  command: node build/index.js
+  command: node build/smithery-server.js
 
 environment:
   required:

@@ -1,4 +1,5 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import dotenv from 'dotenv';
 
@@ -434,4 +435,25 @@ export default function createStatelessServer({
   );
 
   return server.server;
+}
+
+// For Smithery deployment - create and start the server
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const defaultConfig = {
+    rpcUrl: process.env.HYPERION_RPC_URL || 'https://hyperion-testnet.metisdevops.link',
+    chainId: parseInt(process.env.HYPERION_CHAIN_ID || '133717'),
+    networkName: process.env.HYPERION_NETWORK_NAME || 'Hyperion Testnet',
+    explorerUrl: process.env.HYPERION_EXPLORER_URL || 'https://hyperion-testnet-explorer.metisdevops.link',
+    currencySymbol: process.env.HYPERION_CURRENCY_SYMBOL || 'tMETIS',
+    debug: process.env.DEBUG === 'true' || false,
+  };
+
+  const server = createStatelessServer({ config: defaultConfig });
+
+  // Start the server with stdio transport
+  const transport = new StdioServerTransport();
+  server.connect(transport).catch((error) => {
+    console.error("Failed to start Hyperion MCP Server:", error);
+    process.exit(1);
+  });
 }

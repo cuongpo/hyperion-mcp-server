@@ -60,7 +60,7 @@
   },
   "smithery": {
     "runtime": "nodejs",
-    "entry": "src/smithery-server.ts",
+    "entry": "build/smithery-server.js",
     "build": "npm run build",
     "start": "node build/smithery-server.js",
     "docker": false
